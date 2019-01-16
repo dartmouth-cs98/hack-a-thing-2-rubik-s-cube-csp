@@ -1,9 +1,9 @@
 # hack-a-thing-2-rubik-s-cube-csp
 hack-a-thing-2-rubik-s-cube-csp created by GitHub Classroom
 
-####README
+##### README
 
-###Project Description
+### Project Description
 
   In this project I attempted to build a program that modeled a Rubik's Cube as a constraint satisfaction problem and then
   attempted to solve this problem via hillclimbing.  In the final version their are three methods used by the program to attempt
@@ -13,7 +13,7 @@ hack-a-thing-2-rubik-s-cube-csp created by GitHub Classroom
   greedily choose the set of moves that will result in the most new constraints being satisfied.  The third method is simply
   a set of two randomly chosen moves.  This is done to help the program break out of local maxima it may become trapped in.
   
-  ###What I Learned
+  ### What I Learned
   
   I undertook this project knowing that a Rubik's Cube is not well suited to being solves as a CSP, since it is somewhat resistant to
   hillclimbing methods and there is no way to check for things like arc consistency since all states of a Rubiks Cube can 
@@ -23,7 +23,7 @@ hack-a-thing-2-rubik-s-cube-csp created by GitHub Classroom
   value of data gathering, while I did not have the time or resources to create explicit tables mapping how my success changed as 
   I altered different variables, I was able to get a a general idea of how they were related from observation.
   
-  ###What Did Not Work
+  ### What Did Not Work
   
   Unfortunately I was not able to get the program to fully solve the problem.  In my system there are a total of 2916 constrainst that need
   to be satified for the cube to be fully solved.  The furthest my program ever got was 2556 constraints satisfied.  For context,
