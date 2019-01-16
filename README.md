@@ -29,8 +29,7 @@ hack-a-thing-2-rubik-s-cube-csp created by GitHub Classroom
   to be satified for the cube to be fully solved.  The furthest my program ever got was 2556 constraints satisfied.  For context,
   the randomly mixed cubes tend to have around 2000 constraints satified.  While I never got close to a full solution, my score
   did imporve over time, (my first attempts never got further than around 2350 contraints).  There were two possible solutions
-  I thought of but did not have the time or equipment to test.  One was simply expand the search space more than 3 moves down.  
-  I could not implement this with my computer as any search past three moves became intractible.  My other thought was to break the 
+  I thought of but did not have the time or equipment to test.  One was simply expand the search space more than 3 moves down.    I could not implement this with my computer as any search past three moves became intractible.  My other thought was to break the 
   problem into parts.  The most common algorithms to solve a Rubik's Cube break the problem into distinct stage, so I thought
   it might be possible to model each stage as a seperarte CSP with its own contraints, and see if the stages could be progressed 
   through in that manner
