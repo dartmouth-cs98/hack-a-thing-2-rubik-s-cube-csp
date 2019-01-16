@@ -1,7 +1,7 @@
 # hack-a-thing-2-rubik-s-cube-csp
 hack-a-thing-2-rubik-s-cube-csp created by GitHub Classroom
 
-##### README
+# README
 
 ### Project Description
 
