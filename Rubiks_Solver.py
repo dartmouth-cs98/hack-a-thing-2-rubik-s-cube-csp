@@ -7,6 +7,8 @@ Created on Mon Jan 14 23:17:30 2019
 """
 import random
 import copy
+
+#creates a binary constraint dictionary relating every postion on the cube to every other position
 def create_rubix_dict():
     rule_dict = dict()
     
@@ -28,6 +30,8 @@ def create_rubix_dict():
                             rule_dict[(a,c)].add((b,d))
     return rule_dict
 
+
+#this method allows for a single move to be applied to a given cube, returning the resulting cube after the move
 def move_cube(cube, move):
     if move == 0:
         old_pos = []
@@ -371,24 +375,33 @@ def move_cube(cube, move):
         
     return cube
 
+
+#main program
 if __name__ == "__main__":
     rules = create_rubix_dict()
-    cb = []
+    
+    #initialize a cube represented as a list
+    cb = []    
     for x in range(0, 54):
         cb.append(x)
     
     
-    
+    #permute the cube with 250 random moves
     for x in range(0, 250):
         mv = random.randint(0, 17)
         cb = move_cube(cb, mv)
     
+    #create a list to keep track of all satisfied contraints
     lst = []
     for x in range(0,54):
         lst.append([0])
         for y in range(0, 53):
             lst[x].append(0)
+    
+    #loop run attempting to satify all constraints  
     while True:
+        
+        #count all satisfied constaints and mark with ones are unsatisfied      
         satisfied = 0
         for x in range(0, 54):
             for y in range(0, 54):
@@ -402,8 +415,11 @@ if __name__ == "__main__":
         
         new_sat = 0
         best_move = [0]
+        
+        #generate random number to facilitate switching between hill climbing methods
         rd = random.random()
         
+        #search a tree three moves down and choose the 3 move set that results in the most constraints being satisifed
         if rd < 0.45:
             moves_list = []
             for move in range(0, 18):                
@@ -428,14 +444,19 @@ if __name__ == "__main__":
                                             new_sat_move += 1
                                 moves = [move, move_2, move_3]
                                 moves.sort()
+                                
+                                #do not count moves that result in no actual change of cube 
                                 if not (moves == [0,1,2]) and not (moves == [3, 4, 5]) and not (moves == [6, 7, 8]) and not (moves == [9, 10, 11]) and not (moves == [12, 13, 14]) and not (moves == [15, 16, 17]):                            
                                     moves_list.append((new_sat_move, move, move_2, move_3))
                                     
             moves_list.sort(reverse = True)            
+            
+            #randomly choose from the 9 best moves, done to avoid being trapped in local maxima
             rand = random.randint(0, 9)               
             best_move = [moves_list[rand][1], moves_list[rand][2], moves_list[rand][3]]
-            
-        elif rd < 9:
+        
+        #search a tree three moves down and greedily choose the move that result in the most new constraints being satisfied
+        elif rd < .9:
             moves_list = []
             for move in range(0, 18):                
                 cbn = copy.deepcopy(cb)
@@ -460,16 +481,23 @@ if __name__ == "__main__":
                                                 new_sat_move += 1
                                 moves = [move, move_2, move_3]
                                 moves.sort()
+                                
+                                #do not count moves that result in no actual change of cube 
                                 if not (moves == [0,1,2]) and not (moves == [3, 4, 5]) and not (moves == [6, 7, 8]) and not (moves == [9, 10, 11]) and not (moves == [12, 13, 14]) and not (moves == [15, 16, 17]):                            
                                     moves_list.append((new_sat_move, move, move_2, move_3))
                                     
             moves_list.sort(reverse = True)
+            
+            #randomly choose from the 9 best moves, done to avoid being trapped in local maxima
             rand = random.randint(0, 9)               
             best_move = [moves_list[rand][1], moves_list[rand][2], moves_list[rand][3]]
-            
+        
+        #make two random moves, done to help escape local maxima
         else:
             best_move = [random.randint(0, 17), random.randint(0, 17)]
+            
         print(rd, best_move)
+        #permute the cube using the given move set
         for mv in best_move:
             cb = move_cube(cb, mv)
         
